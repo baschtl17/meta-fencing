@@ -1,0 +1,8 @@
+# short-description: Create a bootable USB stick
+# long-description: Creates a partitioned USB stick image that the user
+# can directly dd to boot media.
+
+part /boot --source bootimg-pcbios --ondisk sda --label boot --active --align 1024
+part / --source rootfs --ondisk sda --size 1024 --fstype=btrfs --label platform --align 1024
+part swap --ondisk sda --size 1024 --label swap1 --fstype=swap --align 1024
+bootloader  --timeout=0  --append="rootwait rootfstype=btrfs"

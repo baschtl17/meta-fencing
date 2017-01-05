@@ -1,0 +1,13 @@
+[Unit]
+Description=Ophardt Touch tournament software
+Documentation=http://www.ophardt-team.org
+Requires=apache2.service mysqld.service
+After=mysqld.service 
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/var/lib/ophardt/database/dbinitonce.sh
+
+[Install]
+WantedBy=multi-user.target

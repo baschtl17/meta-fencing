@@ -1,0 +1,5 @@
+# Ophardt only works with innodb database format
+
+[mysqld]
+ignore_builtin_innodb
+plugin_load=innodb=ha_innodb.so

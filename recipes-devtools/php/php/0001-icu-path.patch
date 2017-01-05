@@ -1,0 +1,28 @@
+diff -Nrua a/acinclude.m4 b/acinclude.m4
+--- a/acinclude.m4	2016-06-21 13:11:59.000000000 +0200
++++ b/acinclude.m4	2016-12-06 08:09:51.243624194 +0100
+@@ -2212,13 +2212,13 @@
+     dnl Try to find icu-config
+     AC_PATH_PROG(ICU_CONFIG, icu-config, no, [$PATH:/usr/local/bin])
+   else
+-    ICU_CONFIG="$PHP_ICU_DIR/bin/icu-config"
++    ICU_CONFIG="$PHP_ICU_DIR/icu-config"
+   fi
+ 
+   AC_MSG_CHECKING([for location of ICU headers and libraries])
+ 
+   dnl Trust icu-config to know better what the install prefix is..
+-  icu_install_prefix=`$ICU_CONFIG --prefix 2> /dev/null`
++  icu_install_prefix=`$ICU_CONFIG --bindir 2> /dev/null`/..
+   if test "$?" != "0" || test -z "$icu_install_prefix"; then
+     AC_MSG_RESULT([not found])
+     AC_MSG_ERROR([Unable to detect ICU prefix or $ICU_CONFIG failed. Please verify ICU install prefix and make sure icu-config works.])
+@@ -2240,7 +2240,7 @@
+     fi
+ 
+     ICU_VERSION=$icu_version
+-    ICU_INCS=`$ICU_CONFIG --cppflags-searchpath`
++    ICU_INCS=`$ICU_CONFIG --bindir`/../include
+     ICU_LIBS=`$ICU_CONFIG --ldflags --ldflags-icuio`
+     PHP_EVAL_INCLINE($ICU_INCS)
+     PHP_EVAL_LIBLINE($ICU_LIBS, $1)

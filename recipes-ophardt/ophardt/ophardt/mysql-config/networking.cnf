@@ -1,0 +1,7 @@
+# Ophardt connects the database not via a unix socket, by via
+# TCP/IP on localhost.
+
+[mysqld]
+skip_networking=0
+# this enables both, IPv4 and IPv6
+bind_address=::
